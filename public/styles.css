@@ -1,0 +1,551 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(font/Comfortaa-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'SourceSans3-Regular';
+    src: url(font/SourceSans3-Regular.ttf);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    background-image: url("/Image/background-puzzle.png");
+    background-repeat: repeat-y;
+    background-position: right;
+    font-family: 'SourceSans3-Regular';
+}
+
+h1 {
+    font-family: 'Comfortaa';
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    padding: 24px;
+    color: #343333;
+}
+
+h2 {
+    font-family: 'Comfortaa';
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    margin: 4px;
+    color: #343333;
+}
+
+h3 {
+    font-family: 'Comfortaa';
+    font-size: 1.4rem;
+    color: #343333;
+}
+
+h4 {
+    font-family: 'Comfortaa';
+    font-size: 1rem;
+    margin: 15px 0px;
+    color: #343333;
+}
+
+h5 {
+    font-family: 'Comfortaa';
+    color: #343333;
+}
+
+p {
+    color: #343333;
+    font-size: 16px;
+    font-family: 'SourceSans3-Regular';
+}
+
+#main {
+    width: 1200px;
+    margin: auto;
+}
+
+#accueil {
+    background-color: #dce18c;
+}
+
+#amicale {
+    background-color: #f3b33f;
+}
+
+#activities {
+    background-color: #89c575;
+}
+
+#partners {
+    background-color: #d15e5e;
+}
+
+#contact {
+    background-color: #976fab;
+}
+
+#fb-picto,
+#insta-picto {
+    vertical-align: middle;
+}
+
+#construction {
+    width: 100%;
+    background-color: orange;
+}
+
+#construction img {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.text-amicale a {
+    color: #f3b33f;
+}
+
+.text-activities a {
+    color: #89c575;
+}
+
+.text-partners a {
+    color: #fa7171;
+}
+
+.header {
+    width: 100%;
+    margin: 0px;
+    border-bottom: grey solid 1px;
+}
+
+.logo {
+    margin: 15px;
+}
+
+.title {
+    margin-bottom: 70px;
+}
+
+.cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card {
+    width: 30%;
+    border: #000 1px solid;
+    text-align: center;
+    background-color: #f8e4c0;
+    word-wrap: break-word;
+    margin: 10px;
+}
+
+.card-contact {
+    width: 30%;
+    height: auto;
+    border: #000 1px solid;
+    background-color: #cab5d3;
+    padding: 16px;
+    margin-left: 16px;
+    border-radius: 8px;
+}
+
+.card-contact2 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-color: #cab5d3;
+    border-radius: 8px;
+    border: #000 1px solid;
+    margin: 16px 0px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0px;
+    background-color: #471414;
+    border-top: grey solid 1px;
+}
+
+.hours {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hours2 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.atelier-hours {
+    display:flex;
+    justify-content: space-between;
+}
+
+.atelier-day {
+    width: 30%;
+}
+
+.side-img {
+    max-width: 300px;
+    margin-bottom: 32px;
+}
+
+.event-img {
+    margin-left: auto;
+    text-align: center;
+}
+
+.event-card {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.event-content {
+    width: 66.66%;
+    flex: 1 1 auto;
+}
+
+.card-admin-nordv {
+    width: 45%;
+    height: auto;
+    margin: 10px;
+    padding: 16px;
+    border: #8d2c2c 2px solid;
+    border-radius: 5px;
+    background-color: #f8e4c0;
+}
+
+.card-admin-rdv {
+    width: 45%;
+    height: auto;
+    padding: 16px;
+    margin: 10px;
+    border: #67905e 2px solid;
+    border-radius: 5px;
+    background-color: #f8e4c0;
+}
+
+.bandef {
+    overflow: hidden;
+    white-space: nowrap;
+    box-shadow: 5px 5px 5px 5px #c8cd7f;
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 48px;
+}
+
+.bandef-track {
+    display: inline-flex;
+    animation: scroll 20s linear infinite;
+    background-color: #c8cd7f;
+}
+
+.bandef img {
+    width: 250px;
+    height: auto;
+    margin-right: 10px;
+    content-visibility: visible;
+}
+
+.bandef-track:hover {
+    animation-play-state: paused;
+}
+
+.partner {
+    width: 30%;
+    padding: 16px;
+}
+
+.partner-img {
+    max-width: 150px;
+    width: 100%;
+}
+
+.partner-img img {
+    max-width: 100%;
+    height: auto;
+    padding-top: 30px;
+}
+
+.atelier {
+    background-color: #7db46b;
+    padding: 16px;
+    border-radius: 5px;
+    margin: 16px;
+}
+
+.ariane {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.darken-lign {
+    background-color: #82bb6f;
+    border-radius: 20px;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:visited {
+    color: white;
+}
+
+.footer a:hover {
+    color: #f3b33f;
+}
+
+/* FIN DE LA MAJ DU CSS */
+
+.row {
+    width: 100%;
+    margin: auto auto;
+    display: flex;
+}
+
+.w-4 {
+    width: 33.33%;
+    text-align: center;
+    padding-top: 24px;
+}
+
+.w-6-team {
+    width: 50%;
+}
+
+.w-8-accueil {
+    width: 66.66%;
+    white-space: normal;
+}
+
+.w-11-content {
+    width: 91.66%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.w-12-content {
+    width: 100%;
+}
+
+.w-12-content-news {
+    width: 100%;
+    margin: 12px 0px;
+    background-color: #c8cd7f;
+    border-radius: 8px;
+}
+
+.text {
+    padding: 24px;
+}
+
+.p-footer {
+    color: #d3d1d1;
+    padding: auto;
+    vertical-align: bottom;
+}
+
+p a {
+    text-decoration: none;
+    color: #7d4747;
+}
+
+a:active {
+    text-decoration: none;
+    color: #d3d1d1;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #f3b33f;
+}
+
+a.bouton-picto:link {
+    text-decoration: none;
+    color: #d3d1d1;
+    padding: 7px 15px;
+    background-color: brown;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+a.bouton-picto:visited,
+a.bouton-picto:active {
+    text-decoration: none;
+    color: #d3d1d1;
+    padding: 7px 15px;
+    margin-top: 15px;
+}
+
+a.bouton-picto:hover {
+    color: #f3b33f;
+    padding: 7px 15px;
+    margin-top: 15px;
+}
+
+a.menufooter:link {
+    color: #d9d2ea;
+    text-decoration: none;
+}
+
+a.menufooter:hover {
+    color: #f3b33f;
+    margin-top: 15px;
+}
+
+table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: left;
+    padding-left: 16px;
+}
+
+/*-----------------------------MENU DEROULANT ------------------------------*/
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #471414;
+}
+
+nav ul li {
+    position: relative;
+    flex: 1;
+}
+
+nav ul li a {
+    display: block;
+    color: #471414;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li ul.sous {
+    display: none;
+    position: absolute;
+    background: #471414;
+    min-width: 160px;
+    z-index: 1;
+    top: 100%;
+    border-radius: 4px;
+}
+
+nav ul li ul.sous li a {
+    padding: 8px 8px;
+    border-bottom: #901616 dashed 1px;
+}
+
+nav ul li:hover ul.sous {
+    display: block;
+}
+
+/*----------------------------FIN MENU DEROULANT----------------------------*/
+
+/* RESPONSIVE TABLETTE */
+@media only screen and (max-width: 980px) {
+
+    .row {
+        width: 100%;
+    }
+
+    .row>div {
+        margin: 0 2%;
+        margin-bottom: 15px;
+        float: none;
+    }
+
+    .w-4,
+    .w-6-team,
+    .w-8-accueil,
+    .w-12-content {
+        float: none;
+    }
+
+    .w-8-accueil {
+        text-align: center;
+    }
+
+    a.bouton-picto:link,
+    a.bouton-picto:visited,
+    a.bouton-picto:active,
+    a.menufooter:visited {
+        text-decoration: none;
+        color: #d3d1d1;
+        padding: 5px 10px;
+        margin-top: 15px;
+        font-size: 10px;
+    }
+
+    a.bouton-picto:hover {
+        color: #f3b33f;
+        padding: 5px 10px;
+        margin-top: 15px;
+        font-size: 10px;
+    }
+}
+
+/* RESPONSIVE TELEPHONE */
+@media only screen and (max-width: 380px) {
+
+    .row {
+        width: 100%;
+        display: block;
+    }
+
+    .row>div {
+        margin: 1%;
+    }
+
+    .w-4,
+    .w-6-team,
+    .w-8-accueil,
+    .w-12-content {
+        width: 98%;
+        display: block;
+    }
+
+    .cards {
+        display: flex;
+    }
+}
