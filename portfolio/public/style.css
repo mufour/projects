@@ -1,0 +1,127 @@
+/* ----------------GENERAL---------------- */
+
+:root {
+    font-size: 18px;
+}
+
+body {
+    background-color: #f4912b;
+}
+
+@font-face {
+    font-family: 'Titre';
+    src: url(/public/font/Comfortaa-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Soustitre';
+    src: url(/public/font/Comfortaa-Regular.ttf);
+}
+
+h1 {
+    font-family: 'Titre', Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+h2 {
+    font-family: 'Soustitre', Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    margin: 1rem;
+}
+
+/* -----------------CLASS----------------- */
+
+.menu {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin-left: 6rem;
+    margin-left: 6rem;
+    font-size: 1.4rem;
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 500px;
+    height: 650px;
+    border: 1px solid #EA526F;
+    border-radius: 5px;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #F7A14B;
+}
+
+.card-title {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    background-color: #88d18a;
+}
+
+.btn:hover {
+    background-color: #27802a;
+    color: white;
+}
+
+.about-me {
+    border: 1px solid #EA526F;
+    border-radius: 8px;
+}
+
+.contact {
+    border: 1px solid #EA526F;
+    border-radius: 5px;
+}
+
+.my-links {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 40%;
+}
+
+.bi {
+    margin: 1rem;
+}
+
+/* ------------------ID------------------ */
+
+#header {
+    display: flex;
+    justify-content: center;
+    background-color: #EA526F;
+    border-bottom: 1px solid black;
+}
+
+#main {
+    width: 1200px;
+    margin: auto;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    background-color: #EA526F;
+    border-top: 1px solid black;
+}
