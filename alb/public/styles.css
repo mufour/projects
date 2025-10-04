@@ -30,6 +30,8 @@
     }
 }
 
+
+/*-------------------------------GENERAL-------------------------------*/
 body {
     width: 100%;
     margin: 0;
@@ -82,6 +84,8 @@ p {
     font-family: 'SourceSans3-Regular';
 }
 
+
+/* ----- ID ----- */
 #main {
     width: 1200px;
     margin: auto;
@@ -124,28 +128,17 @@ p {
     justify-content: center;
 }
 
-.text-amicale a {
-    color: #f3b33f;
+#salaries,
+#conseiladmin {
+    text-align: center;
+    padding: 0 16px;
+    margin: 0 8px;
+    border-radius: 10px;
+    background-color: #f0b74c;
 }
 
-.text-activities a {
-    color: #89c575;
-}
 
-.text-partners a {
-    color: #fa7171;
-}
-
-.header {
-    width: 100%;
-    margin: 0px;
-    border-bottom: grey solid 1px;
-}
-
-.logo {
-    margin: 15px;
-}
-
+/* ----- CLASS ----- */
 .title {
     margin-bottom: 70px;
 }
@@ -304,9 +297,26 @@ p {
 
 .ariane {
     width: 100%;
-    height: 64px;
+    height: 32px;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    background-color: #7db46b;
+}
+
+.ariane p {
+    width: 1200px;
+    margin: 0;
+}
+
+.ariane a {
+  text-decoration: none;
+  color: #d3d1d1;
+  margin-right: 24px;
+}
+
+.ariane a:last-child {
+  margin-right: 0; 
 }
 
 .darken-lign {
@@ -324,10 +334,8 @@ p {
 }
 
 .footer a:hover {
-    color: #f3b33f;
+    color: orange;
 }
-
-/* FIN DE LA MAJ DU CSS */
 
 .row {
     width: 100%;
@@ -361,6 +369,13 @@ p {
     width: 100%;
 }
 
+.w-12-content img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
 .w-12-content-news {
     width: 100%;
     margin: 12px 0px;
@@ -390,7 +405,7 @@ a:active {
 
 a:hover {
     text-decoration: none;
-    color: #f3b33f;
+    color: orange;
 }
 
 a.bouton-picto:link {
@@ -411,7 +426,7 @@ a.bouton-picto:active {
 }
 
 a.bouton-picto:hover {
-    color: #f3b33f;
+    color: orange;
     padding: 7px 15px;
     margin-top: 15px;
 }
@@ -422,7 +437,7 @@ a.menufooter:link {
 }
 
 a.menufooter:hover {
-    color: #f3b33f;
+    color: orange;
     margin-top: 15px;
 }
 
@@ -437,47 +452,96 @@ td {
     padding-left: 16px;
 }
 
-/*-----------------------------MENU DEROULANT ------------------------------*/
+/*------------------------------- HEADER --------------------------------*/
+.header {
+    width: 100%;
+    margin: 0px;
+    border-bottom: grey solid 2px;
+}
 
-nav ul {
+.header-menu {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    list-style-type: none;
-    padding: 0;
+    list-style: none;
     margin: 0;
-    background: #471414;
+    padding: 0;
+    background-color: #471414;
+    width: 100%;
+    height: 72px;
 }
 
-nav ul li {
-    position: relative;
+.header-menu li {
     flex: 1;
+    text-align: center;
 }
 
-nav ul li a {
-    display: block;
-    color: #471414;
-    padding: 14px 16px;
+.header-menu a {
+    color: white;
     text-decoration: none;
+    padding: 14px 16px;
+    display: inline-block;
 }
 
-nav ul li ul.sous {
-    display: none;
-    position: absolute;
-    background: #471414;
-    min-width: 160px;
-    z-index: 1;
-    top: 100%;
-    border-radius: 4px;
+.header-menu img {
+    margin-top: 8px;
 }
 
-nav ul li ul.sous li a {
-    padding: 8px 8px;
-    border-bottom: #901616 dashed 1px;
+.header-menu a:hover {
+    color: orange;
 }
 
-nav ul li:hover ul.sous {
-    display: block;
+.text-accueil a {
+    color: #dce18c;
+}
+
+.text-amicale a {
+    color: #f3b33f;
+}
+
+.text-activities a {
+    color: #89c575;
+}
+
+.text-partners a {
+    color: #fa7171;
+}
+
+.text-contact a {
+    color: #b182c8;
+}
+
+/* ---------- MENU SECONDAIRE ---------- */
+#menu-sec {
+    display: flex;
+    justify-content: center; /* ✅ centre horizontalement le bloc de sous-menu */
+    background-color: #471414;
+    border-top: 1px solid #442525;
+    height: 32px;
+}
+
+#menu-sec ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 40%;
+}
+
+#menu-sec li {
+    text-align: center;
+}
+
+#menu-sec a {
+    text-decoration: none;
+    padding: 6px 10px;
+    display: inline-block;
+}
+
+#menu-sec a:hover {
+    color: orange;
 }
 
 /*----------------------------FIN MENU DEROULANT----------------------------*/
@@ -518,7 +582,7 @@ nav ul li:hover ul.sous {
     }
 
     a.bouton-picto:hover {
-        color: #f3b33f;
+        color: orange;
         padding: 5px 10px;
         margin-top: 15px;
         font-size: 10px;

@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 /* ----------------GENERAL---------------- */
 
 :root {
@@ -21,15 +23,26 @@ body {
 h1 {
     font-family: 'Titre', Arial, Helvetica, sans-serif;
     font-size: 2rem;
+    color: #343333;
 }
 
 h2 {
     font-family: 'Soustitre', Arial, Helvetica, sans-serif;
+    color: #343333;
 }
 
 a {
     text-decoration: none;
+    color: #343333;
     margin: 1rem;
+}
+
+a:hover {
+    color: white;
+}
+
+li:hover{
+    color: white
 }
 
 /* -----------------CLASS----------------- */
@@ -93,6 +106,7 @@ a {
 .contact {
     border: 1px solid #EA526F;
     border-radius: 5px;
+    margin-bottom: 32px;
 }
 
 .my-links {
@@ -103,6 +117,21 @@ a {
 
 .bi {
     margin: 1rem;
+}
+
+.accordion-button {
+  background-color: #F7A14B;
+  color: white;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #fd9e3e;
+  color: #343333;
+}
+
+.accordion-body {
+  background-color: #ebc2ca;
+  color: #343333;
 }
 
 /* ------------------ID------------------ */
@@ -124,4 +153,5 @@ a {
     justify-content: center;
     background-color: #EA526F;
     border-top: 1px solid black;
+    height: 32px;
 }
