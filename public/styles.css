@@ -272,14 +272,24 @@ p {
     animation-play-state: paused;
 }
 
+.card-partner {
+    display: flex;
+    width: 49%;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    background-color: #d36565;
+}
 .partner {
-    width: 30%;
-    padding: 16px;
+    width: 70%;
+    margin: 8px;
+    min-height: 250px;
 }
 
 .partner-img {
     max-width: 150px;
     width: 100%;
+    padding: 0 16px;
 }
 
 .partner-img img {
@@ -343,10 +353,17 @@ p {
     display: flex;
 }
 
+.row-partner {
+    width: 100%;
+    margin: auto auto;
+    display: flex;
+    background-color: #d66767;
+    border-radius: 8px;
+}
+
 .w-4 {
     width: 33.33%;
     text-align: center;
-    padding-top: 24px;
 }
 
 .w-6-team {
