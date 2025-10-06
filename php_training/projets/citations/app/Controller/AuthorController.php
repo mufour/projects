@@ -14,4 +14,9 @@ class AuthorController extends AbstractController
         $authors = $author->findAll();
         $this->render('author/list', ['authors' => $authors]);
     }
+
+    public function add()
+    {
+        $this->render('author/add');
+    }
 }
