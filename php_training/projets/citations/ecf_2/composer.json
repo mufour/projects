@@ -1,0 +1,14 @@
+{
+    "name": "dwwm/ecf_2",
+    "autoload": {
+        "psr-4": {
+            "Dwwm\\Ecf2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "raoul-de-colombel"
+        }
+    ],
+    "require": {}
+}
