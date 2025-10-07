@@ -1,22 +1,37 @@
 <?php
 
+/**
+ * Bootstrap du projet
+ */
+
 if (DEBUG) {
-    ini_set('display_errors', '1');
-    ini_set('display_startup_erreors', '1');
-    error_reporting(E_ALL);
+    $params = [
+        'displayErrorReporting' => E_ALL,
+        'logErrors' => 1,
+        'logErrorDetails' => 1
+    ];
 } else {
-    ini_set('display_errors', '0');
-    ini_set('display_startup_errors', '0');
-    error_reporting(0);
+    $params = [
+        'displayErrorReporting' => 0,
+        'logErrors' => 0,
+        'logErrorDetails' => 0
+    ];
 }
 
+ini_set('display_errors', (string)$params['errors']);
+ini_set('display_startup_errors', (string)$params['startupErrors']);
+error_reporting((int)$params['displayErrorReporting']);
+
+/**
+ * Gestion des exceptions
+ */
 set_exception_handler(function (\Throwable $e) {
     $msgError = 'Une erreur est survenue : ';
-    if(DEBUG){
+    if (DEBUG) {
         $msgError .= '<br>' . $e->getMessage() . ' dans le fichier ' . $e->getFile() . ' à la ligne ' . $e->getLine();
     }
     $_SESSION['msgError'] = $msgError;
-    
+
     header('Location: /error/exception');
     exit;
 });

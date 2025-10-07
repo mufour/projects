@@ -3,14 +3,25 @@
 declare(strict_types=1);
 
 // Routes Authors
-$router->map('GET', '/authors', function() {
-(new App\Controller\AuthorController())->index();
+$router->map('GET', '/authors', function () {
+    (new App\Controller\AuthorController())->index();
 });
 
-$router->map('GET|POST', '/authors/add', function() {
-(new App\Controller\AuthorController())->add();
+$router->map('GET|POST', '/authors/add', function () {
+    (new App\Controller\AuthorController())->add();
 });
 
+$router->map('GET', '/authors/delete/[i:id]', function ($id) {
+    (new App\Controller\AuthorController())->delete((int)$id);
+});
+
+$router->map('GET','/authors/[i:id]', function ($id) {
+    (new App\Controller\AuthorController())->show((int)$id);
+});
+
+$router->map('GET','/json/authors', function () {
+    (new App\Controller\AuthorController())->jsonAll();
+});
 
 // Routes quotes
 // $router->map('GET', '/', function () {
@@ -41,6 +52,6 @@ $router->map('GET|POST', '/authors/add', function() {
 //     (new App\Controller\QuoteController())->delete($id);
 // });
 
-$router->map('GET', '/error/exception', function() {
+$router->map('GET', '/error/exception', function () {
     (new App\Controller\ErrorController())->exception();
 });

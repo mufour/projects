@@ -1,5 +1,3 @@
-<?php ?>
-
 <?php
 $title = "Les auteurs";
 $pageTitle = "Liste des auteurs";
@@ -20,9 +18,9 @@ ob_start();
                     <p class="card-text"><?= substr(strip_tags($author->getBiography()), 0, 100) ?> ... etc</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
-                    <a href="/auteur_edit/<?= $author->getId() ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i>
+                    <a href="/authors/edit/<?= $author->getId() ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i>
                         Modifier</a>
-                    <a href="auteur_delete/<?= $author->getId() ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>
+                    <a href="/authors/delete/<?= $author->getId() ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>
                         Supprimer</a>
                 </div>
             </div>

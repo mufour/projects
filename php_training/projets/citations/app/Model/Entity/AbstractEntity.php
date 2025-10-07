@@ -17,7 +17,15 @@ abstract class AbstractEntity
      */
     private ?int $id = null;
 
+    /**
+     * Date de création de l'entité
+     * @var 
+     */
     protected ?DateTime $createdAt = null;
+    /**
+     * Date de modification de l'entité
+     * @var 
+     */
     protected ?DateTime $updatedAt = null;
 
 
@@ -66,22 +74,40 @@ abstract class AbstractEntity
         return $this;
     }
 
+    /**
+     * Retourne la date de création de l'entité
+     * @return DateTime|null
+     */
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
+    /**
+     * Modifie la date de création de l'entité
+     * @param mixed $createdAt
+     * @return AbstractEntity
+     */
     public function setCreatedAt(?DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
+    /**
+     * Retourne la date de mise à jour de l'entité
+     * @return DateTime|null
+     */
     public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Modifie la date de mise à jour de l'éntité
+     * @param mixed $updatedAt
+     * @return AbstractEntity
+     */
     public function setUpdatedAt(?DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

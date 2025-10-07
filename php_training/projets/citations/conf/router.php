@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Router principal de l'application
+ * Il faudra une classe qui est composée d'un AltoRouter et qui gère le routing
+ * ainsi que les middlewares (authentification, etc.)
+ */
+
 declare(strict_types=1);
 
 $router = new AltoRouter();
