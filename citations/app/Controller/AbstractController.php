@@ -1,0 +1,92 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+/**
+ * Controleur abstrait qui permet de factoriser des fonctionnalités communes à tous les controleurs
+ */
+abstract class AbstractController
+{
+    const SUCCESS = 'success';
+    const DANGER = 'danger';
+    const WARNING = 'warning';
+    const INFO = 'info';
+
+    /**
+     * Redirige vers la vue
+     * @param string $view fichier relatif (ex: author/list)
+     * @param array $params les paramètres à passer à la vue (ex: liste d'entités)
+     * @return void
+     */
+    protected function render(string $view, array $params = []): void
+    {
+        require_once ROOT_PATH . '/view/' . $view . '.php';
+    }
+
+    /**
+     * Nouvelle requête HTTP
+     * @param string $url
+     * @return never
+     */
+    protected function redirect(string $url)
+    {
+        header('Location: ' . $url);
+        exit;
+    }
+
+    /**
+     * Ajoute u flash en session
+     * @param string $message à afficher
+     * @param string $code la classe CSS (possiblement const de AbstractController)
+     * @return void
+     */
+    protected function addFlash(string $message, string $code = 'success'): void
+    {
+        $_SESSION['flash'] = [
+            'text' => $message,
+            'code' => $code
+        ];
+    }
+
+    /**
+     * Envoie une réponse JSON
+     * @param array $data les données à envoyer
+     * @param int $code le code HTTP (200 par défaut)
+     * @return never
+     */
+    protected function jsonResponse(array $data, int $code = 200): void
+    {
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        http_response_code($code);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        exit;
+    }
+
+    public function accessValidator(string $role = 'user')
+    {
+        if (!$_SESSION['user']) {
+            $this->addFlash('Vous devez vous identifier pour accéder à cette page', AbstractController::DANGER);
+            $this->redirect('/login');
+        }
+        if ($role == 'admin' && empty($_SESSION['user']['is_admin'])) {
+            $this->addFlash('Vous devez vous identifier pour accéder à cette page', AbstractController::DANGER);
+            $this->redirect('/');
+        }
+    }
+
+    // protected function isGranted(string $role = User::ROLE_USER): bool
+    // {
+    //     if (!isset($_SESSION['user'])) {
+    //         return false;
+    //     }
+    //     if ($role == User::ROLE_ADMIN && empty($_SESSION['user']['is_admin'])) {
+    //         return false;
+    //     };
+    //     return true;
+    // }
+}
