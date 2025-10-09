@@ -32,6 +32,11 @@ class AuthorController extends AbstractController
     {
         //Traitement du formulaire
         if (isset($_POST['author'], $_POST['biography'])) {
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                unset($_SESSION['csrf_token']);
+                $this->addFlash('f*** off b*tch', AbstractController::DANGER);
+                $this->redirect('/authors/add');
+            }
             $authorRepo = new AuthorRepository(\App\Database\PDOSingleton::getInstance());
             $author = [
                 'author' => strip_tags($_POST['author']),
@@ -44,6 +49,8 @@ class AuthorController extends AbstractController
                 $this->redirect('/authors');
             }
         }
+        $csrfToken = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $csrfToken;
         $this->render('/author/add');
     }
 

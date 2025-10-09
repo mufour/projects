@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Database\PDOSingleton;
 use App\Model\Repository\QuoteRepository;
 
 class QuoteController extends AbstractController
 {
     public function index()
     {
-        $quoteRepository = new QuoteRepository(\App\Database\PDOSingleton::getInstance());
-        $quotes = $quoteRepository->findAll();
-
-        dd($quotes);
-
+        $quoteRepo = new QuoteRepository(PDOSingleton::getInstance());
+        $quotes = $quoteRepo->findAll();
         require ROOT_PATH . '/view/quote/list.php';
     }
 

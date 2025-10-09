@@ -23,14 +23,15 @@ $router->map('GET','/json/authors', function () {
     (new App\Controller\AuthorController())->jsonAll();
 });
 
-// Routes quotes
-// $router->map('GET', '/', function () {
-//     (new App\Controller\QuoteController())->index();
-// });
 
-// $router->map('GET', '/quotes', function () {
-//     (new App\Controller\QuoteController())->index();
-// });
+// Routes Quotes
+$router->map('GET', '/', function () {
+    (new App\Controller\QuoteController())->index();
+});
+
+$router->map('GET', '/quotes', function () {
+    (new App\Controller\QuoteController())->index();
+});
 
 // $router->map('GET', '/quotes/list', function () {
 //     (new App\Controller\QuoteController())->index();
@@ -52,9 +53,12 @@ $router->map('GET','/json/authors', function () {
 //     (new App\Controller\QuoteController())->delete($id);
 // });
 
+
+// Routes contre sens
 $router->map('GET', '/error/exception', function () {
     (new App\Controller\ErrorController())->exception();
 });
+
 
 // Routes d'authentification
 $router->map('GET|POST','/login', function () {
@@ -64,6 +68,7 @@ $router->map('GET|POST','/login', function () {
 $router->map('GET','/logout', function () {
     (new App\Controller\AuthController())->logout();
 });
+
 
 // Routes des utilisateurs
 $router->map('GET','/users', function () {
