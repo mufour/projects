@@ -33,6 +33,14 @@ $router->map('GET', '/quotes', function () {
     (new App\Controller\QuoteController())->index();
 });
 
+$router->map('GET|POST','/quotes/add', function () {
+    (new App\Controller\QuoteController())->add();
+});
+
+$router->map('GET', '/quotes/delete/[i:id]', function ($id) {
+    (new App\Controller\QuoteController())->delete($id);
+});
+
 // $router->map('GET', '/quotes/list', function () {
 //     (new App\Controller\QuoteController())->index();
 // });
@@ -47,10 +55,6 @@ $router->map('GET', '/quotes', function () {
 
 // $router->map('GET', '/quotes/edit/[i:id]', function ($id) {
 //     (new App\Controller\QuoteController())->edit($id);
-// });
-
-// $router->map('GET', '/quotes/delete/[i:id]', function ($id) {
-//     (new App\Controller\QuoteController())->delete($id);
 // });
 
 

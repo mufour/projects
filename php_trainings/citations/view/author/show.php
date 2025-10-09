@@ -1,4 +1,5 @@
 <?php
+$author = $params['author'];
 $title = "Les auteurs";
 $pageTitle = "Afficher un auteur";
 $module = "authors";
@@ -6,7 +7,7 @@ ob_start();
 ?>
 
 <div class="g-4 my-4">
-    <h2><?= strip_tags($author->getAuthor()) ?></h2>
+    <h2><?= strip_tags($author) ?></h2>
     <br>
     <?=$params['author']->getBiography() ?>
     <br>
