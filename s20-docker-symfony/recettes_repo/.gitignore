@@ -1,0 +1,21 @@
+# Symfony / PHP
+/vendor/
+/var/
+/node_modules/
+/.env.local
+/.env.*.local
+/.phpunit.cache/
+/.php-cs-fixer.cache
+/public/bundles/
+/public/build/
+
+# IDE / OS
+/.idea/
+/.vscode/
+/.DS_Store
+
+# Logs
+*.log
+
+# Cache / temporaire
+/tmp/
