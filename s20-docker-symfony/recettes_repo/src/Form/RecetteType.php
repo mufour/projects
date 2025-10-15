@@ -3,16 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Recipe;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RecetteType extends AbstractType
 {
@@ -22,6 +23,13 @@ class RecetteType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('slug')
+            // MIS DIRECTEMENT DANS L'ENTITE
+            // TextType::class, [
+            //     'required' => false,
+            //     'constraints' => [
+            //         new Length(min: 10),
+            //         new Regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', message: "Uniquement des lettres ou tiret '-'")
+            //     ]])
             ->add('content')
             ->add('createdAt', null, [
                 'widget' => 'single_text',
