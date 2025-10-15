@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\RecetteType;
+use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Dom\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,11 +17,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class RecipeController extends AbstractController
 {
     #[Route('/recettes', name: 'recipe.index')]
-    public function index(Request $request, RecipeRepository $repository): Response
+    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em): Response
     {
-        $recipes = $repository->findWithLowDuration(10); 
+        $recipes = $repository->findWithLowDuration(60);
+
         return $this->render('recipe/index.html.twig', [
-            'recipes'=> $recipes
+            'recipes' => $recipes
         ]);
     }
 
@@ -31,7 +37,86 @@ class RecipeController extends AbstractController
             ], 301);
         }
         return $this->render('recipe/show.html.twig', [
-           'recipe'=> $recipe,
+            'recipe' => $recipe,
         ]);
     }
+
+    #[Route('/recettes/{id}/edit', name: 'recipe.edit', methods: ['GET', 'POST'])]
+    public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(RecetteType::class, $recipe);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
+            $this->addFlash('success', 'La recette a bien été modifiée');
+            return $this->redirectToRoute('recipe.index');
+        }
+        return $this->render('recipe/edit.html.twig', [
+            'recipe' => $recipe,
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/recettes/create', name: 'recipe.create')]
+    public function create(Request $request, EntityManagerInterface $em)
+    {
+        $recipe = new Recipe();
+        $form = $this->createForm(RecetteType::class, $recipe);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setCreatedAt(new \DateTimeImmutable());
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($recipe);
+            $em->flush();
+            $this->addFlash('success', 'La recette a bien été créée');
+            return $this->redirectToRoute('recipe.index');
+        }
+        return $this->render('recipe/create.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/recettes/{id}/edit', name: 'recipe.delete', methods: ['DELETE'])]
+    public function delete(Recipe $recipe, EntityManagerInterface $em)
+    {
+        $em->remove($recipe);
+        $em->flush();
+        $this->addFlash('success', 'La recette a bien été supprimée');
+        return $this->redirectToRoute('recipe.index');
+    }
 }
+
+
+        // METHODE POUR AJOUTER UNE RECETTE + GARDER EN BDD (persist)
+
+        //         $recipe = new Recipe();
+        //         $recipe->setTitle('Recette : “Le Ragoût de Rêves à la Marley”');
+        //         $recipe->setSlug('ragout-marley');
+        //         $recipe->setDescription('“Dans le grand livre des âmes, certaines pages sentent le thym et le soleil.
+        // D’autres vibrent au rythme d’une basse qui fait danser les épices.”');
+        //         $recipe->setContent('Allume un peu de musique.
+        // Bob Marley, “Stir It Up” de préférence — c’est le tempo parfait pour faire revenir les souvenirs.
+
+        // Dans une casserole, fais dorer les mots que tu n’as jamais osé dire.
+        // Laisse-les caraméliser doucement dans l’huile de coco.
+
+        // Ajoute le riz et les fragments de papier — qu’ils absorbent ensemble le goût du pardon.
+
+        // Verse une larme d’eau claire (ou de rhum ambré, si ton cœur le permet).
+
+        // Laisse mijoter à feu doux, en lisant à voix haute le passage qui t’a rendu plus humain.');
+        //         $recipe->setDuration(45);
+        //         $recipe->setCreatedAt(new \DateTimeImmutable());
+        //         $recipe->setUpdatedAt(new \DateTimeImmutable());
+        //         $em->persist($recipe);
+
+        // METHODE POUR MODIFIER UNE RECETTE + GARDER EN BDD (flush)
+
+        // $recipes[0]->setTitle('Pâtes à la Sauce Beauleauniaise');
+        // $em->flush();
+
+        // METHODE POUR SUPPRIMER UNE RECETTE + GARDER EN BDD (remove, flush)
+
+        // $em->remove($recipes)[2];
+        // $em->flush();

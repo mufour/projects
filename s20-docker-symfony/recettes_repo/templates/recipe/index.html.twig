@@ -3,12 +3,38 @@
 {% block title "Toutes les recettes" %}
 
 {% block body %}
-CEST LA LISTE DE TOUTES LES RECETTES
-<ul>
-{% for recipe in recipes %}
-<li>
-<a href="{{ url('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title}}</a>
-</li>
+<h3>CEST LA LISTE DE TOUTES LES RECETTES</h3>
+<p>
+	<a class="btn btn-primary btn-sm" href="{{ url('recipe.create')}}">Ajouter une recette</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for recipe in recipes %}
+			<tr>
+				<td>
+					<a href="{{ url('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title}}</a>
+				</td>
+				<td>
+					<a class="btn btn-primary btn-sm" href="{{ url('recipe.edit', {id: recipe.id}) }}">Modifier la recette</a>
+				</td>
+				<td>
+					<div class="d-flex gap-1">
+						<form action="{{ url('recipe.delete', {id: recipe.id}) }}" method="post">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit" class="btn btn-danger btn-sm">Supprimer la recette</button>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+
 {% endfor %}
-</ul>
+</tbody>	
+</table>
 {% endblock %}
