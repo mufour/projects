@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Categorie de recette : " ~category.name %}
+
+{% block body %}
+<h1>{{ category.title }}</h1>
+
+{{ form_start(form) }}
+<div class="d-flex">
+    {{ form_row(form.name) }}
+    {{ form_row(form.slug) }}
+</div>
+    {{ form_rest(form) }}
+{{ form_end(form) }}
+
+{% endblock %}

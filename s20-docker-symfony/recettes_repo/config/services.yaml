@@ -16,5 +16,11 @@ services:
     App\:
         resource: '../src/'
 
+    #Ajouter une classe pour qu'elle soit reconnue ~
+    App\Demo:
+        class: App\Demo
+        arguments:
+            $key: 'coucou'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Recipe;
+use Proxies\__CG__\App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,6 +39,11 @@ class RecetteType extends AbstractType
             //         new Regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', message: "Uniquement des lettres ou tiret '-'")
             //     ]])
 
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'expanded' => true,
+                'choice_label' => 'name'
+            ])
             ->add('content', TextareaType::class,[
                 'empty_data' => ''
             ])

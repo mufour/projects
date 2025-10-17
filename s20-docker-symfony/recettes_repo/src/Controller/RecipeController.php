@@ -2,25 +2,48 @@
 
 namespace App\Controller;
 
+use App\Demo;
 use App\Form\RecetteType;
 use App\Entity\Recipe;
+use App\Repository\CategoryRepository;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Dom\Entity;
+use Proxies\__CG__\App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RecipeController extends AbstractController
 {
-    #[Route('/recettes', name: 'recipe.index')]
-    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em): Response
+    #[Route('/demo')]
+    public function demo(Demo $demo)
     {
+        dd($demo);
+    }
+
+    #[Route('/recettes', name: 'recipe.index')]
+    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, CategoryRepository $categoryRepository): Response
+    {
+        // Afficher les recettes de la catégorie plats-italiens
+        // $plaPrincipal = $categoryRepository->findOneBy(['slug' => 'plats-italiens']);
+        // $plaPrincipal = $categoryRepository->findOneBy(['slug' => 'plats-italiens']);
+        // dd($plaPrincipal);
+
         $recipes = $repository->findWithLowDuration(60);
 
+        // Essayer de créer une catégorie à la volée, sans l'inscrire dans la BDD, grâce au cascade: ['persist'] dans Recipe
+        // $category = (new Category())
+        // ->setUpdatedAt(new \DateTimeImmutable())
+        // ->setCreatedAt(new \DateTimeImmutable())
+        // ->setTitle('tacos')
+        // ->setSlug('tacos');
+        // $recipes[4]->setCategory($category);
+        // $em->flush();
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipes
         ]);
