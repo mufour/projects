@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RecipeController extends AbstractController
@@ -27,15 +28,19 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/recettes', name: 'recipe.index')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, CategoryRepository $categoryRepository): Response
     {
+
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+        
         // Afficher les recettes de la catégorie plats-italiens
         // $plaPrincipal = $categoryRepository->findOneBy(['slug' => 'plats-italiens']);
         // $plaPrincipal = $categoryRepository->findOneBy(['slug' => 'plats-italiens']);
         // dd($plaPrincipal);
-
-        $recipes = $repository->findWithLowDuration(60);
-
+        $page = $request->query->getInt('page', 1);
+        $recipes = $repository->paginateRecipes($request);
+        $maxPage = ceil($recipes->count() / 2);
         // Essayer de créer une catégorie à la volée, sans l'inscrire dans la BDD, grâce au cascade: ['persist'] dans Recipe
         // $category = (new Category())
         // ->setUpdatedAt(new \DateTimeImmutable())
@@ -45,7 +50,9 @@ class RecipeController extends AbstractController
         // $recipes[4]->setCategory($category);
         // $em->flush();
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipes
+            'recipes' => $recipes,
+            'maxPage' => $maxPage,
+            'page' => $page
         ]);
     }
 

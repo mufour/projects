@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Toutes les recettes" %}
+
+{% block body %}
+<h3>CEST LA LISTE DE TOUTES LES CATEGORIES DE RECETTES</h3>
+<p>
+	<a class="btn btn-primary btn-sm" href="{{ url('category.create')}}">Ajouter une recette</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Catégorie</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for category in categories %}
+			<tr>
+				{# <td>
+					<a href="{{ url('category.show', {id: category.id, slug: category.slug}) }}">{{ category.title}}</a>
+				</td> #}
+				<td>{{ category.title | default }}
+				<td>
+					<a class="btn btn-primary btn-sm" href="{{ url('category.edit', {id: category.id}) }}">Modifier la catégorie</a>
+				</td>
+				<td>
+					<div class="d-flex gap-1">
+						<form action="{{ url('recipe.delete', {id: category.id}) }}" method="post">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit" class="btn btn-danger btn-sm">Supprimer la catégorie</button>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+
+{% endfor %}
+</tbody>	
+</table>
+{% endblock %}

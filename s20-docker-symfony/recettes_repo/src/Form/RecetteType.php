@@ -41,7 +41,7 @@ class RecetteType extends AbstractType
 
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'expanded' => true,
+                'expanded' => true, 
                 'choice_label' => 'name'
             ])
             ->add('content', TextareaType::class,[

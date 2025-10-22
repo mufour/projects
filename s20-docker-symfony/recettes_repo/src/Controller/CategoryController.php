@@ -20,15 +20,60 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Constraints\Required;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
-    public function index(): Response
+    #[Route('/category', name: 'category.index')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function index(CategoryRepository $repository): Response
     {
+          $categories = $repository->findAll();
         return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+            'categories' => $categories,
+        ]);
+    }
+
+    //  #[Route('/recettes', name: 'recipe.index')]
+    // public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, CategoryRepository $categoryRepository): Response
+    // {
+    //     return $this->render('recipe/index.html.twig', [
+    //         'recipes' => $recipes
+    //     ]);
+    // }
+
+        #[Route('/category/{slug}-{id}', name: 'category.show', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
+    public function show(Request $request, string $slug, int $id, RecipeRepository $repository): Response
+    {
+        $category = $repository->find($id);
+        if ($category->getSlug() !== $slug) {
+            return $this->redirectToRoute('category.show', [
+                'slug' => $category->getSlug(),
+                'id' => $id
+            ], 301);
+        }
+        return $this->render('category/show.html.twig', [
+            'category' => $category,
+        ]);
+    }
+
+     #[Route('/category/create', name: 'category.create')]
+    public function create(Request $request, EntityManagerInterface $em)
+    {
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category->setCreatedAt(new \DateTimeImmutable());
+            $category->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($category);
+            $em->flush();
+            $this->addFlash('success', 'La catégorie a bien été créée');
+            return $this->redirectToRoute('category.index');
+        }
+        return $this->render('category/create.html.twig', [
+            'form' => $form,
         ]);
     }
 

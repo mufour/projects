@@ -27,6 +27,10 @@ class CategoryType extends AbstractType
                 'required' => false,
                 'empty_data' => ''
             ])
+
+            ->add('title', TextType::class, [
+                'required' => true
+            ])
             ->add('recipes', EntityType::class, [
                 'class' => Recipe::class,
                 'choice_label' => 'title',
