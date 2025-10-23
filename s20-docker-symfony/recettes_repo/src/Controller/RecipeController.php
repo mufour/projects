@@ -38,9 +38,7 @@ class RecipeController extends AbstractController
         // $plaPrincipal = $categoryRepository->findOneBy(['slug' => 'plats-italiens']);
         // $plaPrincipal = $categoryRepository->findOneBy(['slug' => 'plats-italiens']);
         // dd($plaPrincipal);
-        $page = $request->query->getInt('page', 1);
-        $recipes = $repository->paginateRecipes($request);
-        $maxPage = ceil($recipes->count() / 2);
+
         // Essayer de créer une catégorie à la volée, sans l'inscrire dans la BDD, grâce au cascade: ['persist'] dans Recipe
         // $category = (new Category())
         // ->setUpdatedAt(new \DateTimeImmutable())
@@ -49,10 +47,12 @@ class RecipeController extends AbstractController
         // ->setSlug('tacos');
         // $recipes[4]->setCategory($category);
         // $em->flush();
+        
+        $page = $request->query->getInt('page', 1);
+        $limit = 2;
+        $recipes = $repository->paginateRecipes($page);
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipes,
-            'maxPage' => $maxPage,
-            'page' => $page
         ]);
     }
 

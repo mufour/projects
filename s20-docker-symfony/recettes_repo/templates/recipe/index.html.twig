@@ -10,6 +10,9 @@
 <table class="table">
 	<thead>
 		<tr>
+		<th>{{ knp_pagination_sortable(recipes, 'ID', 'r.id') }}</th>
+		<th>{{ knp_pagination_sortable(recipes, 'Titre', 'r.title') }}</th>
+		{# <th>{{ knp_pagination_sortable(category, 'Titre', 'r.name') }}</th> #}
 			<th>Title</th>
 			<th>Catégorie</th>
 			<th>Actions</th>
@@ -18,6 +21,7 @@
 	<tbody>
 		{% for recipe in recipes %}
 			<tr>
+			<td>{{ recipe.id }}</td>
 				<td>
 					<a href="{{ url('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title}}</a>
 				</td>
@@ -40,13 +44,16 @@
 </tbody>	
 </table>
 
-<div class="d-flex">
+{{ knp_pagination_render(recipes) }}
+
+{# AVANT LE KNP PAGINATOR}
+{# <div class="d-flex">
 {% if page > 1 %}
 <a href="{{ url('recipe.index', {page: page - 1})  }}" class="btn btn-secondary">Page précédente</a>
 {% endif %}
 {% if page < maxPage %}
 <a href="{{ url('recipe.index', {page: page + 1})  }}" class="btn btn-secondary">Page suivante</a>
 {% endif %}
-</div>
+</div> #}
 
 {% endblock %}

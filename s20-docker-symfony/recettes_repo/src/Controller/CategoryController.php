@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(CategoryRepository $repository): Response
     {
-          $categories = $repository->findAll();
+          $categories = $repository->findAllWithCount();
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
         ]);
@@ -53,8 +53,8 @@ class CategoryController extends AbstractController
                 'id' => $id
             ], 301);
         }
-        return $this->render('category/show.html.twig', [
-            'category' => $category,
+        return $this->render('category/index.html.twig', [
+            'category' => $repository->finAllWithCount()
         ]);
     }
 

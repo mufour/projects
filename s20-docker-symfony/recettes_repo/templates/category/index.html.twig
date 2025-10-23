@@ -3,40 +3,37 @@
 {% block title "Toutes les recettes" %}
 
 {% block body %}
-<h3>CEST LA LISTE DE TOUTES LES CATEGORIES DE RECETTES</h3>
-<p>
-	<a class="btn btn-primary btn-sm" href="{{ url('category.create')}}">Ajouter une recette</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>Catégorie</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for category in categories %}
+	<h3>CEST LA LISTE DE TOUTES LES CATEGORIES DE RECETTES</h3>
+	<p>
+		<a class="btn btn-primary btn-sm" href="{{ url('category.create')}}">Ajouter une catégorie de recette</a>
+	</p>
+	<table class="table">
+		<thead>
 			<tr>
-				{# <td>
-					<a href="{{ url('category.show', {id: category.id, slug: category.slug}) }}">{{ category.title}}</a>
-				</td> #}
-				<td>{{ category.title | default }}
-				<td>
-					<a class="btn btn-primary btn-sm" href="{{ url('category.edit', {id: category.id}) }}">Modifier la catégorie</a>
-				</td>
-				<td>
-					<div class="d-flex gap-1">
-						<form action="{{ url('recipe.delete', {id: category.id}) }}" method="post">
-							<input type="hidden" name="_method" value="DELETE">
-							<button type="submit" class="btn btn-danger btn-sm">Supprimer la catégorie</button>
-						</div>
-					</form>
-				</td>
+				<th>Nom</th>
+				<th>Nb recettes</th>
+				<th>Actions</th>
 			</tr>
-		</tbody>
+		</thead>
+		<tbody>
+			{% for category in categories %}
+				<tr>
+					<td>{{ category.name | default }}</td>
+					<td>{{ category.count }}</td>
+					<td></td>
+					<td>
+						<div class="d-flex gap-1">
+							<a class="btn btn-primary btn-sm" href="{{ url('category.edit', {id: category.id}) }}">Modifier la catégorie</a>
+							<form action="{{ url('recipe.delete', {id: category.id}) }}" method="post">
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger btn-sm">Supprimer la catégorie</button>
+							</form>
+						</div>
 
-{% endfor %}
-</tbody>	
-</table>
-{% endblock %}
+					</td>
+				</tr>
+			</tbody>
+
+		{% endfor %}
+	</tbody>
+</table>{% endblock %}
