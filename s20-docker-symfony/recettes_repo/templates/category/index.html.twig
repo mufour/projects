@@ -20,7 +20,6 @@
 				<tr>
 					<td>{{ category.name | default }}</td>
 					<td>{{ category.count }}</td>
-					<td></td>
 					<td>
 						<div class="d-flex gap-1">
 							<a class="btn btn-primary btn-sm" href="{{ url('category.edit', {id: category.id}) }}">Modifier la catégorie</a>
@@ -29,7 +28,6 @@
 								<button type="submit" class="btn btn-danger btn-sm">Supprimer la catégorie</button>
 							</form>
 						</div>
-
 					</td>
 				</tr>
 			</tbody>

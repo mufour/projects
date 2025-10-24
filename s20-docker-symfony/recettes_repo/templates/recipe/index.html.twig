@@ -3,45 +3,42 @@
 {% block title "Toutes les recettes" %}
 
 {% block body %}
-<h3>CEST LA LISTE DE TOUTES LES RECETTES</h3>
-<p>
-	<a class="btn btn-primary btn-sm" href="{{ url('recipe.create')}}">Ajouter une recette</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-		<th>{{ knp_pagination_sortable(recipes, 'ID', 'r.id') }}</th>
-		<th>{{ knp_pagination_sortable(recipes, 'Titre', 'r.title') }}</th>
-		{# <th>{{ knp_pagination_sortable(category, 'Titre', 'r.name') }}</th> #}
-			<th>Title</th>
-			<th>Catégorie</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for recipe in recipes %}
+	<h3>CEST LA LISTE DE TOUTES LES RECETTES</h3>
+	<p>
+		<a class="btn btn-primary btn-sm" href="{{ url('recipe.create')}}">Ajouter une recette</a>
+	</p>
+	<table class="table">
+		<thead>
 			<tr>
-			<td>{{ recipe.id }}</td>
-				<td>
-					<a href="{{ url('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title}}</a>
-				</td>
-				<td>{{ recipe.category.title | default }}
-				<td>
-					<a class="btn btn-primary btn-sm" href="{{ url('recipe.edit', {id: recipe.id}) }}">Modifier la recette</a>
-				</td>
-				<td>
-					<div class="d-flex gap-1">
-						<form action="{{ url('recipe.delete', {id: recipe.id}) }}" method="post">
-							<input type="hidden" name="_method" value="DELETE">
-							<button type="submit" class="btn btn-danger btn-sm">Supprimer la recette</button>
-						</div>
-					</form>
-				</td>
+				<th>{{ knp_pagination_sortable(recipes, 'ID', 'r.id') }}</th>
+				<th>{{ knp_pagination_sortable(recipes, 'Titre', 'r.title') }}</th>
+				{# <th>{{ knp_pagination_sortable(category, 'Titre', 'r.name') }}</th> #}
+				<th>Durée de prépa</th>
+				<th>Catégorie</th>
+				<th>Actions</th>
 			</tr>
-		</tbody>
+		</thead>
+		<tbody>
+			{% for recipe in recipes %}
+				<tr>
+					<td>{{ recipe.id }}</td>
+					<td>{{ recipe.title | default }}</td>
+					<td>{{ recipe.duration }}</td>
+					<td>{# {{ recipe.category_id }} #}</td>
+					<td>
+						<div class="d-flex gap-1">
+						<a class="btn btn-primary btn-sm" href="{{ url('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">Modifier la recette</a>
+							<form action="{{ url('recipe.delete', {id: recipe.id}) }}" method="post">
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger btn-sm">Supprimer la recette</button>
+							</div>
+						</form>
+					</td>
+				</tr>
+			</tbody>
 
-{% endfor %}
-</tbody>	
+		{% endfor %}
+	</tbody>
 </table>
 
 {{ knp_pagination_render(recipes) }}
@@ -54,6 +51,4 @@
 {% if page < maxPage %}
 <a href="{{ url('recipe.index', {page: page + 1})  }}" class="btn btn-secondary">Page suivante</a>
 {% endif %}
-</div> #}
-
-{% endblock %}
+</div> #}{% endblock %}
